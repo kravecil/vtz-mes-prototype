@@ -3,9 +3,9 @@
     <q-toolbar>
         <q-btn icon="menu" flat dense round />
         <q-toolbar-title>
-            <b>ЕИС:</b> Диспетчеризация
+            ЕИС: <span class="text-weight-thin">Диспетчеризация</span>
         </q-toolbar-title>
-        <q-separator />
+        <q-separator vertical spaced inset color="blue-3" />
         <div>
             Галлямов Марат Асгатович
         </div>

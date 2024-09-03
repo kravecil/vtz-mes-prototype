@@ -1,3 +1,5 @@
+import '@/assets/fonts'
+
 import { createPinia } from 'pinia'
 import { createApp } from 'vue'
 

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/roboto": "^5.0.14",
     "@quasar/extras": "^1.16.12",
     "pinia": "^2.1.7",
     "quasar": "^2.16.9",
