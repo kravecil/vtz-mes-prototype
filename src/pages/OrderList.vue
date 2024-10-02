@@ -3,6 +3,6 @@
 
 <template>
   <q-page padding>
-    <h1>Statistics page</h1>
+    <h1>order list page</h1>
   </q-page>
 </template>

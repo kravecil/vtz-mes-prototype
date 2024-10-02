@@ -7,7 +7,7 @@ const drawer = ref(true)
 </script>
 
 <template>
-  <q-drawer v-model="drawer" :width="200" class="bg-blue">
+  <q-drawer v-model="drawer" :width="200" class="bg-blue q-pt-md">
     <q-scroll-area class="fit">
       <navigation-left />
     </q-scroll-area>

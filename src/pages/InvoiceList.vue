@@ -3,6 +3,6 @@
 
 <template>
   <q-page padding>
-    <h1>Warehouse page</h1>
+    <h1>invoice list page</h1>
   </q-page>
 </template>
