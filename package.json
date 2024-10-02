@@ -12,6 +12,7 @@
     "@fontsource/roboto": "^5.0.14",
     "@quasar/extras": "^1.16.12",
     "lodash": "^4.17.21",
+    "luxon": "^3.5.0",
     "pinia": "^2.1.7",
     "quasar": "^2.16.9",
     "vue": "^3.4.29",
