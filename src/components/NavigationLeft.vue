@@ -9,13 +9,13 @@ const navigation = [
 
 <template>
   <q-list class="text-blue-1">
-    <q-item v-for="(nav, idx) in navigation" :key="idx" :to="nav.route" active-class="text-blue bg-blue-1">
+    <q-item v-for="(nav, idx) in navigation" :key="idx" :to="nav.route" active-class="bg-deep-orange-10">
       <q-item-section avatar>
         <q-icon :name="nav.icon" />
       </q-item-section>
       <q-item-section>
         <q-item-label>{{ nav.caption }}</q-item-label>
       </q-item-section>
-      </q-item>
+    </q-item>
   </q-list>
 </template>
