@@ -41,7 +41,7 @@ function createFakeOrder() {
 
 function generateOrders() {
   orders.value = [...Array(MAX_ORDERS)]
-    .map((el) => createFakeOrder())
+    .map(() => createFakeOrder())
     .sort((a, b) => b.progress - a.progress);
 }
 
