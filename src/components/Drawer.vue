@@ -1,13 +1,14 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
-import NavigationLeft from '@/components/NavigationLeft.vue';
+import NavigationLeft from "@/components/NavigationLeft.vue";
+import { useCoreStore } from "@/stores/core";
 
-const drawer = ref(true)
+const core = useCoreStore();
 </script>
 
 <template>
-  <q-drawer v-model="drawer" :width="200" class="bg-grey-10 q-pt-md">
+  <q-drawer v-model="core.drawer" :width="200" class="bg-grey-10 q-pt-md">
     <q-scroll-area class="fit">
       <navigation-left />
     </q-scroll-area>
