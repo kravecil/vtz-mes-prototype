@@ -4,4 +4,5 @@ export default [
   { path: '/workshops', component: () => import('@/pages/WorkshopList.vue') },
   { path: '/warehouse', component: () => import('@/pages/WarehouseList.vue') },
   { path: '/invoices', component: () => import('@/pages/InvoiceList.vue') },
+  { path: '/invoices/create', component: () => import('@/pages/InvoiceCreate.vue') },
 ]

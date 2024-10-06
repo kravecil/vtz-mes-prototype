@@ -28,12 +28,17 @@ function createFakeInvoice() {
   const createdAtFormatted = createdAt.toFormat("dd.MM.yyyy");
 
   const isGranted = _.sample([true, false]);
+  const isApproveRequired = isGranted ? false : _.sample([true, false]);
+
+  const fio = faker.person.fullName();
 
   return {
     name,
     createdAt,
     createdAtFormatted,
     isGranted,
+    isApproveRequired,
+    fio,
   };
 }
 
@@ -50,7 +55,12 @@ onMounted(() => generateInvoices());
   <q-page padding>
     <list-header caption="Накладные">
       <template #buttons>
-        <q-btn label="Новая накладная" icon="add" color="deep-orange-8" />
+        <q-btn
+          label="Новая накладная"
+          icon="add"
+          color="deep-orange-8"
+          to="/invoices/create"
+        />
       </template>
     </list-header>
 
@@ -67,17 +77,16 @@ onMounted(() => generateInvoices());
         clickable
         class="rounded-borders q-mb-md bg-deep-orange-1"
       >
-        <q-item-section>{{ invoice.name }}</q-item-section>
-        <q-item-section
-          v-if="invoice.isGranted"
-          class="text-center self-stretch"
-          ><q-item-label>
-            <q-badge color="green">
-              <q-icon name="done" />ОТК
-            </q-badge></q-item-label
-          >
+        <q-item-section>
+          <q-item-label caption>{{ invoice.createdAtFormatted }}</q-item-label>
+          <q-item-label>{{ invoice.name }}</q-item-label>
         </q-item-section>
-        <q-item-section side>{{ invoice.createdAtFormatted }}</q-item-section>
+        <q-item-section v-if="invoice.isApproveRequired">
+          <q-item-label>
+            <q-badge color="red"> <q-icon name="priority_high" />ОТК</q-badge>
+          </q-item-label>
+        </q-item-section>
+        <q-item-section side class="col-4">{{ invoice.fio }}</q-item-section>
       </q-item>
     </q-list>
   </q-page>

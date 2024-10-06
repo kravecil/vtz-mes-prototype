@@ -2,27 +2,15 @@
 import ListHeader from "@/components/ListHeader.vue";
 import { ref, onMounted } from "vue";
 import _ from "lodash";
-import { faker } from "@faker-js/faker/locale/ru";
 
+import { useDataStore } from "@/stores/data";
 const MAX_WORKSHOPS = 15;
+const dataStore = useDataStore();
 
 const workshops = ref([]);
 
-function createFakeWorkshop() {
-  const name = `Цех_${faker.word.adjective()}`;
-
-  const workload = _.random(0, 1, true);
-  const workloadLabel = Math.floor(workload * 100) + "%";
-
-  return {
-    name,
-    workload,
-    workloadLabel,
-  };
-}
-
 function generateWorkshops() {
-  workshops.value = [...Array(MAX_WORKSHOPS)].map(() => createFakeWorkshop());
+  workshops.value = [...Array(MAX_WORKSHOPS)].map(() => dataStore.createFakeWorkshop());
 }
 
 onMounted(() => generateWorkshops());

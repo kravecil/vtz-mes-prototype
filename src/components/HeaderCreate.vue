@@ -13,7 +13,7 @@ const onBack = () => {
   <div class="q-mb-lg">
     <q-toolbar>
       <q-btn
-        v-if="!backBtn"
+        v-if="backBtn"
         round
         flat
         icon="arrow_back"

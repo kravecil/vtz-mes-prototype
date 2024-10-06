@@ -1,51 +1,20 @@
 <script setup>
-import { ref, onMounted } from "vue";
 import ListHeader from "@/components/ListHeader.vue";
-import _ from "lodash";
-import { faker } from "@faker-js/faker/locale/ru";
-import { DateTime } from "luxon";
+import { useDataStore } from "@/stores/data";
+import { onMounted, ref } from "vue";
 
 const MAX_ITEMS = 50;
-const MAX_COUNT = 100;
 
 const tab = ref("balance");
 
 const items = ref([]);
 
-function createFakeItem() {
-  const TYPES = [
-    { type: "assembly", prefix: "Узел" },
-    { type: "part", prefix: "Деталь" },
-    { type: "material", prefix: "Материал" },
-  ];
-
-  const UNITS = ["шт", "кг", "л", "м3"];
-
-  const randomType = _.sample(TYPES);
-
-  const name = `${randomType.prefix}_${faker.word.adjective()}`;
-  const type = randomType.type;
-  const count = _.random(1, MAX_COUNT);
-  const countLabel = count + ' ' + (randomType.type === 'material'? _.sample(UNITS) : 'шт')
-
-  const now = DateTime.now();
-  let sinceAt = now.minus({ days: _.random(600) });
-  const daysPassed = now.diff(sinceAt).as("days");
-
-  sinceAt = sinceAt.toFormat('dd.MM.yyyy')
-
-  return {
-    name,
-    type,
-    count,
-    countLabel,
-    sinceAt,
-    daysPassed,
-  };
-}
+const dataStore = useDataStore();
 
 function generateItems() {
-  items.value = [...Array(MAX_ITEMS)].map(() => createFakeItem());
+  items.value = [...Array(MAX_ITEMS)].map(() =>
+    dataStore.createFakeWarehouseItem()
+  );
 }
 
 onMounted(() => generateItems());
@@ -70,7 +39,9 @@ onMounted(() => generateItems());
         class="rounded-borders q-mb-md bg-deep-orange-1"
       >
         <q-item-section>{{ item.name }}</q-item-section>
-        <q-item-section class="text-center text-weight-light">{{ item.countLabel }}</q-item-section>
+        <q-item-section class="text-center text-weight-light">{{
+          item.countLabel
+        }}</q-item-section>
         <q-item-section side>
           <span class="text-weight-bold">{{ item.sinceAt }}</span>
           <q-badge :label="item.daysPassed" color="deep-orange-6" />
