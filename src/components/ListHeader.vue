@@ -1,12 +1,5 @@
 <script setup>
-import { useRouter } from "vue-router";
-
 defineProps(["caption"]);
-const router = useRouter();
-
-const handleBack = () => {
-  router.back();
-};
 </script>
 
 <template>
