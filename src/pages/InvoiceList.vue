@@ -1,7 +1,7 @@
 <script setup>
 import ListHeader from "@/components/ListHeader.vue";
 
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { DateTime } from "luxon";
 import _ from "lodash";
 import { faker } from "@faker-js/faker/locale/ru";
@@ -11,6 +11,11 @@ const MAX_INVOICES = 15;
 const tab = ref("current");
 
 const invoices = ref([]);
+const invoicesFiltered = computed(() =>
+  tab.value === "current"
+    ? invoices.value.filter((el) => !el.isGranted)
+    : invoices.value.filter((el) => el.isGranted)
+);
 
 function createFakeInvoice() {
   const _name1 = _.random(999).toString().padStart(3, "0");
@@ -56,17 +61,21 @@ onMounted(() => generateInvoices());
 
     <q-list>
       <q-item
-        v-for="(invoice, idx) in invoices"
+        v-for="(invoice, idx) in invoicesFiltered"
         :key="idx"
         v-ripple
         clickable
         class="rounded-borders q-mb-md bg-deep-orange-1"
       >
         <q-item-section>{{ invoice.name }}</q-item-section>
-        <q-item-section v-if="invoice.isGranted" class="text-center self-stretch"><q-item-label>
-          <q-badge color="green">
-            <q-icon name="done" />ОТК
-          </q-badge></q-item-label>
+        <q-item-section
+          v-if="invoice.isGranted"
+          class="text-center self-stretch"
+          ><q-item-label>
+            <q-badge color="green">
+              <q-icon name="done" />ОТК
+            </q-badge></q-item-label
+          >
         </q-item-section>
         <q-item-section side>{{ invoice.createdAtFormatted }}</q-item-section>
       </q-item>
